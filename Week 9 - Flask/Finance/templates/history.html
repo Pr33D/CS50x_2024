@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Start
+{% endblock %}
+
+{% block main %}
+{% if not transactions %}
+<div class="mb-3">
+    No history to show.
+</div>
+{% endif %}
+
+{% if transactions %}
+<div class="mb-3">
+    Sort by:
+    <select>
+        {% if not sort %}
+        <option disabled selected>Choose</option>
+        {% endif %}
+        <option value="time">Time</option>
+        <option value="symbol">Symbol</option>
+        <option value="price">Price</option>
+        <option value="count">Shares</option>
+    </select>
+</div>
+<table class="table table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th>Time</th>
+            <th>Symbol</th>
+            <th>Price</th>
+            <th>Shares</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transaction in transactions %}
+        {% if transaction.action == "sell" %}
+        <tr class="table-danger">
+        {% elif transaction.action == "buy" %}
+        <tr class="table-success">
+        {% else %}
+        <tr>
+        {% endif %}
+            <td>{{ transaction.time }}</td>
+            <td>{{ transaction.stock }}</td>
+            <td>{{ transaction.price }}</td>
+            <td>{{ transaction.count }}</td>
+            <td>{{ transaction.action }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+    let select = document.querySelector('select');
+    select.addEventListener('change', function() {
+        window.location.search = '?sort=' + select.value;
+    });
+</script>
+{% endif %}
+{% endblock %}

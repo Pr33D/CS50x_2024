@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            // TODO: Add code to check answers to questions
+            document.addEventListener('DOMContentLoaded', function() {
+                // Part 1 with single buttons
+                let btns = document.querySelectorAll('.btn')
+                let right = document.querySelector('.r');
+                let wrongs = document.querySelectorAll('.w');
+                let eva = document.querySelector('#eva1');
+
+                // if the right button is clicked
+                right.addEventListener('click', () => {
+                    right.style.backgroundColor = 'green';
+                    eva.innerHTML = 'Correct';
+                    btns.forEach((btn) => btn.setAttribute('disabled', true));
+                });
+                // if the wrong button is clicked
+                wrongs.forEach((w) => w.addEventListener('click', () => {
+                    w.style.backgroundColor = 'red';
+                    eva.innerHTML = 'Incorrect';
+                    btns.forEach((btn) => btn.setAttribute('disabled', true));
+                }));
+
+                // Part 2 with form & submit-EventListener
+                document.querySelector('#q').addEventListener('submit', (e) => {
+                    // prevent form from submitting & reloading page
+                    e.preventDefault();
+
+                    let ipt = document.querySelector('#ipt');
+                    let eva2 = document.querySelector('#eva2');
+                    let answers = ['world wide web', 'worldwideweb'];
+
+                    // check if user input equals right answers
+                    if(answers.includes(ipt.value.toLowerCase()))
+                    {
+                        ipt.style.backgroundColor = 'green';
+                        eva2.innerHTML = 'Correct';
+                    }
+                    else if(!answers.includes(ipt.value.toLowerCase()))
+                    {
+                        ipt.style.backgroundColor = 'red';
+                        eva2.innerHTML = 'Incorrect';
+                    }
+                    document.querySelector('#submit').setAttribute('disabled', true);
+                });
+    });
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>In what country did the first Starbucks open outside of North America?</h3>
+                <div id="eva1"></div>
+                <!-- TODO: Add multiple choice question here -->
+                    <button class="btn w">Netherlands</button>
+                    <button class="btn r">Japan</button>
+                    <button class="btn w">China</button>
+                    <button class="btn w">Australia</button>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>In a website browser address bar, what does “www” stand for?</h3>
+                <div id="eva2"></div>
+                <!-- TODO: Add free response question here -->
+                <form id="q">
+                    <input type="text" id="ipt">
+                    <input type="submit" id="submit" value="Check answer">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

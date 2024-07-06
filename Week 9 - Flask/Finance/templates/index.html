@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Start
+{% endblock %}
+
+{% block main %}
+<div class="mb-3">
+    Cash: {{ cash }}
+</div>
+<div class="mb-3">
+    Total value: {{ total }}
+</div>
+
+{% if not stocks %}
+<div class="mb-3">
+    No portfolio to show.
+</div>
+{% endif %}
+
+{% if stocks %}
+<table class="table table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th>Symbol</th>
+            <th>Owned</th>
+            <th>Average Price</th>
+            <th>Actual Price</th>
+            <th>Difference</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stock in stocks %}
+        {% if stock.price_avg > stock.price_act %}
+        <tr class="table-danger">
+        {% elif stock.price_avg < stock.price_act %}
+        <tr class="table-success">
+        {% else %}
+        <tr>
+        {% endif %}
+            <td>{{ stock.stock }}</td>
+            <td>{{ stock.count }}</td>
+            <td>{{ stock.price_avg | usd }} each, {{ stock.total_avg | usd }} total</td>
+            <td>{{ stock.price_act | usd }} each, {{ stock.total_act | usd }} total</td>
+            <td>{{ stock.diff | usd }} each, {{ stock.total_diff | usd }} total</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

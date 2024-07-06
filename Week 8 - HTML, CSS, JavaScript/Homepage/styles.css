@@ -1,0 +1,40 @@
+body {
+    padding-top: 70px;
+    padding-bottom: 0;
+}
+
+.dropdown-menu {
+    background-color: #f0f0f0;
+}
+
+footer {
+    display: none;
+    visibility: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+footer > div > a {
+    color: #cc4400;
+    text-decoration: none;
+}
+footer > div > a:hover {
+    color: #ff0000;
+    text-decoration: underline;
+}
+
+h1 {
+    color: #66aa00;
+}
+
+@media (min-width: 992px)
+{
+    body {
+        padding-bottom: 120px; /* Padding because of footer */
+    }
+
+    footer {
+        display: block;
+        visibility: visible;
+    }
+}

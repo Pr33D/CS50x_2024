@@ -1,0 +1,19 @@
+<script>, <link>, <title>, <meta>
+<p>, <span>
+<div>
+<a>
+<input>, <button>, <textarea>
+<label>
+<header>, <main>, <footer>, <nav>
+<h1>, <h3>
+<ul>, <li>
+<svg>
+
+padding
+position
+width
+color
+display, visibility
+
+i decided to use javascript with self assigned ID's instead of using bootstrap classes,
+to trigger exactly what i wanted to.

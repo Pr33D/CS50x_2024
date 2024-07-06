@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block main %}
+<div class="mb-3">
+    Cash: {{ cash }}
+</div>
+
+{% if not stocks %}
+No Stocks to sell.
+{% endif %}
+{% if stocks %}
+    <form action="/sell" method="post">
+        <div class="mb-3">
+            <select autocomplete="off" autofocus class="form-select mx-auto w-auto" name="symbol">
+                <option disabled selected>Please select</option>
+                {% for stock in stocks %}
+                <option value="{{ stock.stock }}">{{ stock.stock }} (max. {{ stock.count }})</option>
+                {% endfor %}
+                </select>
+        </div>
+        <div class="mb-3">
+            <input type="number" name="shares" autocomplete="off" class="form-control mx-auto w-auto" placeholder="Shares(Qty)" min="1">
+        </div>
+        <button class="btn btn-primary" type="submit">Sell</button>
+    </form>
+    {% endif %}
+{% endblock %}
