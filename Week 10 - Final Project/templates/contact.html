@@ -1,0 +1,29 @@
+{% extends "layout.html" %} {% block title %} - Contact {% endblock %} {% block
+    main %} 
+    <div class="container-fluid">
+      <div class="container-lg bg-secondary bg-opacity-25 p-5 mb-5">
+          <form id="contactform">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Examplename">
+            </div>
+              <div class="mb-3">
+                  <label for="mail" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="mail" placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                  <label for="file" class="form-label">Add file</label>
+                  <input class="form-control" type="file" id="file">
+                </div>
+                <div class="mb-3">
+                  <label for="message" class="form-label">Message</label>
+                  <textarea class="form-control" id="message" rows="9"></textarea>
+                </div>
+                <div class="col-auto">
+                  <button type="submit" class="btn btn-primary mb-3">Send</button>
+                </div>
+          </form>
+      </div>
+    </div>
+    {% endblock %}
+    
