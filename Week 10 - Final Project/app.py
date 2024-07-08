@@ -146,9 +146,11 @@ def logout():
 def overview():
     """ Overview of all Tasks and quick new Task """
 
-    #TODO
+    taskz = [{"title": "Hallo", "text": "Welcome to Taskz", "subs": ["erstere", "zweitere", "drittere"], "day": 3, "month": 2, "check": False},
+             {"title": "Hallo", "text": "Welcome to Taskz", "subs": ["erstere", "zweitere", "drittere"], "day": 3, "month": 4, "check": False},
+             {"title": "Hallo", "text": "Welcome to Taskz", "subs": ["erstere", "zweitere", "drittere"], "day": 3, "month": 4, "check": False}]
 
-    return render("overview.html")
+    return render("overview.html", taskz=taskz)
 
 
 @app.route("/new")

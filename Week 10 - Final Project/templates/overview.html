@@ -1,2 +1,32 @@
 {% extends "layout.html" %} {% block title %} - Overview {% endblock %} {% block
-main %} {% endblock %}
+main %} 
+<div class="container-fluid">
+  <div class="row">
+{% if taskz %}
+{% for task in taskz %}
+{% if task.check == False %}
+<div class="card col-12 col-sm-3">
+    <div class="card-body">
+      <h5 class="card-title">{{ task.title }}</h5>
+      <p class="card-text">{{ task.text }}</p>
+    </div>
+    {% if task.subs %}
+    <ul class="list-group list-group-flush">
+        {% for sub in task.subs %}
+        <li class="list-group-item">{{ sub }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="card-body">
+      <a href="/day&day={{ task.day }}" class="card-link">Watch Day</a>
+      <a href="/calendar&month={{ task.month }}" class="card-link">Watch Calendar</a>
+    </div>
+  </div>
+  {% endif %}
+{% endfor %}
+{% else %}
+Nothing here...
+{% endif %}
+</div>
+</div>
+{% endblock %}

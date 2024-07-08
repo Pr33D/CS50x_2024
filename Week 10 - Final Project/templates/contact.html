@@ -1,29 +1,40 @@
 {% extends "layout.html" %} {% block title %} - Contact {% endblock %} {% block
     main %} 
-    <div class="container-fluid">
+    <div class="container-fluid mt-3">
       <div class="container-lg bg-secondary bg-opacity-25 p-5 mb-5">
           <form id="contactform">
             <div class="mb-3">
               <label for="name" class="form-label">Name</label>
-              <input type="text" class="form-control" id="name" placeholder="Examplename">
+              <input type="text" class="form-control" id="name" placeholder="John Doe">
             </div>
               <div class="mb-3">
                   <label for="mail" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="mail" placeholder="name@example.com">
-                </div>
-                <div class="mb-3">
-                  <label for="file" class="form-label">Add file</label>
-                  <input class="form-control" type="file" id="file">
+                  <input type="email" class="form-control" id="mail" placeholder="john@doe.com">
                 </div>
                 <div class="mb-3">
                   <label for="message" class="form-label">Message</label>
-                  <textarea class="form-control" id="message" rows="9"></textarea>
+                  <textarea class="form-control" id="message" rows="9" placeholder="Leave your message here :)"></textarea>
                 </div>
                 <div class="col-auto">
-                  <button type="submit" class="btn btn-primary mb-3">Send</button>
+                  <button type="submit" class="btn btn-primary">Send</button>
                 </div>
           </form>
       </div>
     </div>
+
+    <script>
+      // contact form js
+      document.addEventListener('DOMContentLoaded', () => {
+
+        document.querySelector('#contactform').addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          let name = document.querySelector('#name');
+          let email = document.querySelector('#mail');
+          let message = document.querySelector('#message');
+          alert('Thanks for your interest, ' + name.value + ' (' + email.value + ')\nYour mail was not sent, because we have no script for that.' + '\nYour message was:\n' + message.value);
+        });
+      });
+    </script>
     {% endblock %}
     
