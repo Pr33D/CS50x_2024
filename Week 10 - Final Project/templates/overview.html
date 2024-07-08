@@ -1,11 +1,11 @@
 {% extends "layout.html" %} {% block title %} - Overview {% endblock %} {% block
 main %} 
 <div class="container-fluid">
-  <div class="row">
 {% if taskz %}
+<div class="row">
 {% for task in taskz %}
 {% if task.check == False %}
-<div class="card col-12 col-sm-3">
+<div class="card col-12 col-md-3">
     <div class="card-body">
       <h5 class="card-title">{{ task.title }}</h5>
       <p class="card-text">{{ task.text }}</p>
@@ -24,9 +24,9 @@ main %}
   </div>
   {% endif %}
 {% endfor %}
+</div>
 {% else %}
 Nothing here...
 {% endif %}
-</div>
 </div>
 {% endblock %}

@@ -146,9 +146,10 @@ def logout():
 def overview():
     """ Overview of all Tasks and quick new Task """
 
-    taskz = [{"title": "Hallo", "text": "Welcome to Taskz", "subs": ["erstere", "zweitere", "drittere"], "day": 3, "month": 2, "check": False},
-             {"title": "Hallo", "text": "Welcome to Taskz", "subs": ["erstere", "zweitere", "drittere"], "day": 3, "month": 4, "check": False},
-             {"title": "Hallo", "text": "Welcome to Taskz", "subs": ["erstere", "zweitere", "drittere"], "day": 3, "month": 4, "check": False}]
+    taskz = [{"title": "Hallo", "text": "Welcome to Taskz, this is the first task", "subs": ["erstere"], "day": 3, "month": 2, "check": False},
+             {"title": "Hallo", "text": "Welcome to Taskz", "subs": ["erstere", "zweitere", "drittere"], "day": 16, "month": 4, "check": False},
+             {"title": "Hallo", "text": "Welcome to Taskz", "subs": ["erstere", "zweitere", "drittere"], "day": 12, "month": 6, "check": False},             
+             {"title": "Hallo", "text": "Welcome to Taskz", "subs": ["erstere", "zweitere"], "day": 3, "month": 3, "check": False}]
 
     return render("overview.html", taskz=taskz)
 
