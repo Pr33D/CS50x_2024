@@ -1,42 +1,25 @@
+import { themeLoad, themeChange } from "./theme.js";
+
+
 window.onload = () => {
     // initial load
 
     themeLoad();
 }
 
-function themeLoad() {
-    // load theme from local storage
-
-    if(!localStorage.getItem("theme"))
-    {
-        localStorage.setItem("theme", "light");
-        document.querySelector("html").setAttribute("data-bs-theme", "light");
-        document.querySelector("#themebtn").innerHTML = "-> Dark";
-    } else {
-        document.querySelector("html").setAttribute("data-bs-theme", localStorage.getItem("theme"));
-        switch(localStorage.getItem("theme")) {
-            case "dark":
-                document.querySelector("#themebtn").innerHTML = "-> Light";
-                break;
-            case "light":
-                document.querySelector("#themebtn").innerHTML = "-> Dark";
-                break;
-        }
-
-    }
-
-    return ;
-}
+// themebutton -> change theme
+document.querySelector("#themebtn").addEventListener("click", () => { themeChange(); });
 
 
-document.querySelector("#themebtn").addEventListener("click", () => {
-    // Change Theme on Click
+// contact form
+document.addEventListener('DOMContentLoaded', () => {
 
-    if (localStorage.getItem("theme") === "light") {
-        localStorage.setItem("theme", "dark");
-    } 
-    else if (localStorage.getItem("theme") === "dark") {
-        localStorage.setItem("theme", "light");
-    }
-themeLoad();
+document.querySelector('#contactform').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    let name = document.querySelector('#name');
+    let email = document.querySelector('#mail');
+    let message = document.querySelector('#message');
+    alert('Thanks for your interest, ' + name.value + ' (' + email.value + ')\nYour mail was not sent, because we have no script for that.' + '\nYour message was:\n' + message.value);
+});
 });

@@ -1,3 +1,13 @@
+body {
+  padding-bottom: 56px;
+}
+
+.checktask {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+}
+
 .list-no {
   list-style-type: none;
 }/*# sourceMappingURL=style.css.map */
