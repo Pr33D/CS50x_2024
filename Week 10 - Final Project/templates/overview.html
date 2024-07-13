@@ -1,34 +1,34 @@
 {% extends "layout.html" %} {% block title %} - Overview {% endblock %} {% block
-main %} 
+main %}
 <div class="container-fluid">
-{% if taskz %}
-<div class="row">
-{% for task in taskz %}
-{% if task.check == False %}
-<div class="col-12 col-md-3 p-3">
-<div class="card">
-    <div class="card-body">
-      <h5 class="card-title">{{ task.title }}</h5><input type="checkbox" name="done" class="checktask" value="done{{ task.id }}"> 
-      <p class="card-text">{{ task.text }}</p>
-    </div>
-    {% if task.subs %}
-    <ul class="list-group list-group-flush">
-        {% for sub in task.subs %}
-        <li class="list-group-item">{{ sub }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    <div class="card-body">
-      <a href="/day&day={{ task.day }}" class="card-link">Watch Day</a>
-      <a href="/calendar&month={{ task.month }}" class="card-link">Watch Calendar</a>
+  {% if taskz %}
+  <div class="container">
+    <h2>Open Taskz</h2>
+    <div class="row">
+      {% for task in taskz %} {% if task.checked == 0 %}
+      <div class="col-12 col-md-3 p-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ task.title }}</h5>
+            <input
+              type="checkbox"
+              name="{{ task.id}}"
+              class="checktask"
+              value="{{ task.id }}"
+            />
+            <p class="card-text">{{ task.text }}</p>
+          </div>
+          <div class="card-body">
+            <a href="/day&day={{ task.day }}" class="card-link">Watch Day</a>
+            <a href="/calendar&month={{ task.month }}" class="card-link"
+              >Watch Calendar</a
+            >
+          </div>
+        </div>
+      </div>
+      {% endif %} {% endfor %}
     </div>
   </div>
-</div>
-  {% endif %}
-{% endfor %}
-</div>
-{% else %}
-Nothing here...
-{% endif %}
+  {% else %} Nothing here... {% endif %}
 </div>
 {% endblock %}

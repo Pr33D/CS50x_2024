@@ -22,7 +22,7 @@ def login_required(f):
     return decorated_function
 
 
-def insertUser(username, password):
+def insert_user(username, password):
     """ insert new user to database """
 
     con = sql.connect(DB)
@@ -32,8 +32,8 @@ def insertUser(username, password):
     con.close()
 
 
-def retrieveUsers(username):
-    """ retrieve users from database by name """
+def get_users(username):
+    """ retrieve all users from database by name """
 
     con = sql.connect(DB)
     con.row_factory = sql.Row
@@ -42,3 +42,15 @@ def retrieveUsers(username):
     users = cur.fetchall()
     con.close()
     return users
+
+
+def get_taskz(user_id):
+    """ retrieve taskz from database by user_id """
+
+    con = sql.connect(DB)
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    cur.execute("SELECT * FROM taskz WHERE user = ?", user_id)
+    taskz = cur.fetchall()
+    con.close()
+    return taskz
