@@ -54,3 +54,23 @@ def get_taskz(user_id):
     taskz = cur.fetchall()
     con.close()
     return taskz
+
+
+def insert_task(user_id, title, text, date):
+    """ insert new task to database """
+    
+    con = sql.connect(DB)
+    cur = con.cursor()
+    cur.execute()
+    con.commit()
+    con.close()
+
+
+def delete_task(id):
+    """ delete task from database """
+
+    con = sql.connect(DB)
+    cur = con.cursor()
+    cur.execute("DELETE FROM taskz WHERE id = ?", id)
+    con.commit()
+    con.close()

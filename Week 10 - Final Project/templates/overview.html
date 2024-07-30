@@ -1,5 +1,8 @@
 {% extends "layout.html" %} {% block title %} - Overview {% endblock %} {% block
 main %}
+
+<!-- taskz overview -->
+
 <div class="container-fluid">
   {% if taskz %}
   <div class="container">
@@ -10,12 +13,15 @@ main %}
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">{{ task.title }}</h5>
-            <input
+            <form action="/overview" method="post">
+              <input
               type="checkbox"
-              name="{{ task.id}}"
+              name="checktask"
               class="checktask"
               value="{{ task.id }}"
+              onChange="this.form.submit()"
             />
+            </form>
             <p class="card-text">{{ task.text }}</p>
           </div>
           <div class="card-body">
@@ -23,6 +29,9 @@ main %}
             <a href="/calendar&month={{ task.month }}" class="card-link"
               >Watch Calendar</a
             >
+            <form action="/overview" method="post">
+              <button class="btn btn-primary" type="submit" name="delete" value="{{ task.id }}">Delete</button>
+            </form>
           </div>
         </div>
       </div>
