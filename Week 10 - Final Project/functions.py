@@ -38,7 +38,7 @@ def get_users(username):
     con = sql.connect(DB)
     con.row_factory = sql.Row
     cur = con.cursor()
-    cur.execute("SELECT * FROM users WHERE username = ?", [username])
+    cur.execute("SELECT * FROM users WHERE username = ?", (username,))
     users = cur.fetchall()
     con.close()
     return users
@@ -50,7 +50,7 @@ def get_taskz(user_id):
     con = sql.connect(DB)
     con.row_factory = sql.Row
     cur = con.cursor()
-    cur.execute("SELECT * FROM taskz WHERE user = ?", user_id)
+    cur.execute("SELECT * FROM taskz WHERE user = ?", (user_id,))
     taskz = cur.fetchall()
     con.close()
     return taskz

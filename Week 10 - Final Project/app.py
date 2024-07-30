@@ -91,7 +91,7 @@ def login():
             print(row["username"])
 
         if len(user) != 1:
-            flash("Invalid username")
+            flash("User doesn't exit")
             errors = True
         elif not check_password_hash(user[0]["hash"], password):
             flash("Invalid password!")

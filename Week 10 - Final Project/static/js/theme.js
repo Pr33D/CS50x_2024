@@ -5,15 +5,15 @@ export function themeLoad() {
     {
         localStorage.setItem("theme", "light");
         document.querySelector("html").setAttribute("data-bs-theme", "light");
-        document.querySelector("#themebtn").innerHTML = "-> Dark";
+        document.querySelector("#themebtn").innerHTML = "Dark";
     } else {
         document.querySelector("html").setAttribute("data-bs-theme", localStorage.getItem("theme"));
         switch(localStorage.getItem("theme")) {
             case "dark":
-                document.querySelector("#themebtn").innerHTML = "-> Light";
+                document.querySelector("#themebtn").innerHTML = "Light";
                 break;
             case "light":
-                document.querySelector("#themebtn").innerHTML = "-> Dark";
+                document.querySelector("#themebtn").innerHTML = "Dark";
                 break;
         }
     }
