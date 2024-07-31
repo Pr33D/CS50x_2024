@@ -1,33 +1,17 @@
-export function themeLoad() {
-    // load theme from local storage
-
-    if(!localStorage.getItem("theme"))
-    {
-        localStorage.setItem("theme", "light");
-        document.querySelector("html").setAttribute("data-bs-theme", "light");
-        document.querySelector("#themebtn").innerHTML = "Dark";
-    } else {
-        document.querySelector("html").setAttribute("data-bs-theme", localStorage.getItem("theme"));
-        switch(localStorage.getItem("theme")) {
-            case "dark":
-                document.querySelector("#themebtn").innerHTML = "Light";
-                break;
-            case "light":
-                document.querySelector("#themebtn").innerHTML = "Dark";
-                break;
-        }
-    }
-}
-
+// additional theme functions
+// theme load + themebutton text functions are direct @layout!
 
 export function themeChange() {
         // Change Theme on Click
 
         if (localStorage.getItem("theme") === "light") {
             localStorage.setItem("theme", "dark");
+            document.querySelector("#themebtn").innerHTML = "Switch to Light";
         } 
         else if (localStorage.getItem("theme") === "dark") {
             localStorage.setItem("theme", "light");
+            document.querySelector("#themebtn").innerHTML = "Switch to Dark";
         }
-    themeLoad();
+
+        document.querySelector("html").setAttribute("data-bs-theme", localStorage.getItem("theme"));
 }

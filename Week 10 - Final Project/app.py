@@ -2,7 +2,8 @@ from flask import Flask, redirect, render_template as render, request, session, 
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from functions import login_required, insert_user, get_users, get_taskz
+from functions import login_required, insert_user, get_users, get_taskz, insert_task, check_task, delete_task
+
 
 # config app
 app = Flask(__name__)
@@ -91,7 +92,7 @@ def login():
             print(row["username"])
 
         if len(user) != 1:
-            flash("User doesn't exit")
+            flash("User doesn't exist")
             errors = True
         elif not check_password_hash(user[0]["hash"], password):
             flash("Invalid password!")
@@ -139,22 +140,45 @@ def logout():
 
 
 # user sites, where login is needed from here
-@app.route("/overview")
+@app.route("/overview", methods=["GET", "POST"])
 @login_required
 def overview():
     """ Overview of all Tasks and quick new Task """
+
+    if request.method == "POST":
+
+        if "checktask" in request.form:
+            # request task id
+            checktask = request.form.get("checktask")
+            # check
+            check_task(checktask)
+        elif "delete" in request.form:
+            # request task id
+            delete = request.form.get("delete")
+            # delete
+            delete_task(delete)
+
+        redirect("/overview")
 
     taskz = get_taskz(session["user"])
 
     return render("overview.html", taskz=taskz)
 
 
-@app.route("/new")
+@app.route("/new", methods=["GET", "POST"])
 @login_required
 def new():
     """ New Task """
 
-    #TODO
+    if request.method == "POST":
+        title = request.form.get("title")
+        text = request.form.get("text")
+        due_date = request.form.get("date")
+
+        # check if date == real date format & not in past
+
+        # title max length?
+
 
     return render("new.html")
 

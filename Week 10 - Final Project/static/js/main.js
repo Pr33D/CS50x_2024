@@ -1,19 +1,13 @@
-import { themeLoad, themeChange } from "./theme.js";
-
-
-window.onload = () => {
-    // initial load
-
-    themeLoad();
-}
+import { themeChange } from "./theme.js";
 
 // themebutton -> change theme
 document.querySelector("#themebtn").addEventListener("click", () => { themeChange(); });
 
 
-// contact form
+// what happens on DOM loaded
 document.addEventListener('DOMContentLoaded', () => {
 
+// contact form
 document.querySelector('#contactform').addEventListener('submit', (e) => {
     e.preventDefault();
 

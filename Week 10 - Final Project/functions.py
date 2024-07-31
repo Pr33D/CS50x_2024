@@ -66,6 +66,20 @@ def insert_task(user_id, title, text, date):
     con.close()
 
 
+def check_task(id):
+    """ check or uncheck task """
+
+    con = sql.connect(DB)
+    cur = con.cursor()
+    select = cur.execute("SELECT * FROM taskz WHERE id = ?", id)
+    if select == 0:
+        cur.execute("UPDATE taskz SET checked = 1 WHERE id = ?", id)
+    elif select == 1:
+        cur.execute("UPDATE taskz SET checked = 0 WHERE id = ?", id)
+    con.commit()
+    con.close()
+
+
 def delete_task(id):
     """ delete task from database """
 
