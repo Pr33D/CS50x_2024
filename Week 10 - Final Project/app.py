@@ -1,6 +1,7 @@
-from flask import Flask, redirect, render_template as render, request, session, flash
+from flask import Flask, redirect, render_template as render, request, session, flash, url_for
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 from functions import login_required, insert_user, get_users, get_taskz, insert_task, check_task, delete_task
 
@@ -19,6 +20,9 @@ def index():
     """ The Apps home page """
 
     #TODO
+
+    if session["user"]:
+        return redirect(url_for("overview"))
 
     return render("index.html")
 
@@ -57,10 +61,10 @@ def register():
         try:
             insert_user(username, generate_password_hash(password))
             flash("Registration succeeded")
-            return redirect("/login")
+            return redirect(url_for("login"))
         except Exception as e:
             flash("Error: {e}")
-            return redirect("/register")
+            return redirect(url_for("register"))
 
     return render("register.html")
 
@@ -106,7 +110,7 @@ def login():
         session["user"] = user[0]["id"]
         flash(f"Successfully logged in, welcome {username}")
 
-        return redirect("/overview")
+        return redirect(url_for("overview"))
 
     return render("login.html")
 
@@ -122,7 +126,7 @@ def contact():
 
 @app.route("/impressum")
 def impressum():
-    """ The Apps home page """
+    """ The Impressum """
 
     return render("impressum.html")
 
@@ -136,7 +140,7 @@ def logout():
     flash("Successfully logged out.")
 
     #redirect to home
-    return redirect("/")
+    return redirect(url_for("index"))
 
 
 # user sites, where login is needed from here
@@ -152,13 +156,14 @@ def overview():
             checktask = request.form.get("checktask")
             # check
             check_task(checktask)
+
         elif "delete" in request.form:
             # request task id
             delete = request.form.get("delete")
             # delete
             delete_task(delete)
 
-        redirect("/overview")
+        redirect(url_for("overview"))
 
     taskz = get_taskz(session["user"])
 
@@ -174,11 +179,30 @@ def new():
         title = request.form.get("title")
         text = request.form.get("text")
         due_date = request.form.get("date")
+        
+        date_check = True
+        if due_date:
+            try:
+                date = datetime.strptime(due_date, "%Y-%m-%d")
+            except:
+                date_check = False
+        else:
+            date = datetime.min
 
-        # check if date == real date format & not in past
+        if title and text and date_check:
+            insert_task(session["user"], title, text, date)
+            flash("Task added successfully.")
+        if not title:
+            flash("No title entered.")
+        if not text:
+            flash("no text entered.")
+        if not date_check:
+            flash("date entered, but wrong format used ('YYYY-MM-DD')")
+        
+        redirect(url_for("new"))
 
-        # title max length?
-
+        # TODO check if date not in past
+        # TODO title max length?
 
     return render("new.html")
 

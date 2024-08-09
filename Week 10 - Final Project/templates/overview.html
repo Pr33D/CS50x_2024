@@ -5,12 +5,13 @@ main %}
 
 <div class="container-fluid">
   {% if taskz %}
-  <div class="container">
+  <!-- container for open taskz -->
+  <div class="container mt-3">
     <h2>Open Taskz</h2>
     <div class="row">
-      {% for task in taskz %} {% if task.checked == 0 %}
+      {% for task in taskz | sort(attribute="date") %} {% if task.checked == 0 %}
       <div class="col-12 col-md-3 p-3">
-        <div class="card">
+        <div class="card border-primary">
           <div class="card-body">
             <h5 class="card-title">{{ task.title }}</h5>
             <form action="/overview" method="post">
@@ -22,15 +23,17 @@ main %}
               onChange="this.form.submit()"
             />
             </form>
-            <p class="card-text">{{ task.text }}</p>
+            <p class="card-text" style="white-space: pre-line">{{ task.text }}</p>
           </div>
           <div class="card-body">
-            <a href="/day&day={{ task.day }}" class="card-link">Watch Day</a>
-            <a href="/calendar&month={{ task.month }}" class="card-link"
-              >Watch Calendar</a
-            >
+            {% if task.date.strftime("%Y") != "0001"  %}
+            <p>Expires: {{ task.date.strftime("%B %d, %Y") }}</p>
+            <p><a href="/day?year={{ task.date.strftime('%Y') }}&month={{ task.date.strftime('%m') }}&day={{ task.date.strftime('%d') }}" class="card-link">Day</a>
+            <a href="/calendar?year={{ task.date.strftime('%Y') }}&month={{ task.date.strftime('%m') }}" class="card-link"
+              >Calendar</a></p>
+              {% endif %}
             <form action="/overview" method="post">
-              <button class="btn btn-primary" type="submit" name="delete" value="{{ task.id }}">Delete</button>
+              <button class="btn btn-danger" type="submit" name="delete" value="{{ task.id }}">Delete</button>
             </form>
           </div>
         </div>
@@ -38,6 +41,39 @@ main %}
       {% endif %} {% endfor %}
     </div>
   </div>
+<!-- container for closed taskz with different build -->
+  <div class="container mt-3">
+    <h2>Closed Taskz</h2>
+    <div class="row">
+      {% for task in taskz | sort(attribute="created", reverse=True) %} {% if task.checked == 1 %}
+      <div class="col-12 col-md-3 p-3">
+        <div class="card border-secondary">
+          <div class="card-body text-secondary">
+            <h5 class="card-title">{{ task.title }}</h5>
+            <form action="/overview" method="post">
+              <input
+              type="checkbox"
+              name="checktask"
+              class="checktask"
+              value="{{ task.id }}"
+              onChange="this.form.submit()"
+            />
+            </form>
+            <p class="card-text" style="white-space: nowrap; overflow: hidden;">{{ task.text }}</p>
+          </div>
+          <div class="card-body">
+            <p>Created: {{ task.created }}</p>
+            <form action="/overview" method="post">
+              <button class="btn btn-danger" type="submit" name="delete" value="{{ task.id }}">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endif %} {% endfor %}
+    </div>
+  </div>
+
+  <!-- if there are no taskz, show this: -->
   {% else %} Nothing here... {% endif %}
 </div>
 {% endblock %}
