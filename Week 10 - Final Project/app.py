@@ -1,3 +1,5 @@
+import calendar
+
 from flask import Flask, redirect, render_template as render, request, session, flash, url_for
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -151,12 +153,14 @@ def overview():
 
     if request.method == "POST":
 
+        # task is done - check
         if "checktask" in request.form:
             # request task id
             checktask = request.form.get("checktask")
             # check
             check_task(checktask)
 
+        # task no longer needed - delete (irreversible!)
         elif "delete" in request.form:
             # request task id
             delete = request.form.get("delete")
@@ -165,6 +169,7 @@ def overview():
 
         redirect(url_for("overview"))
 
+    # get taskz from database
     taskz = get_taskz(session["user"])
 
     return render("overview.html", taskz=taskz)
@@ -176,10 +181,13 @@ def new():
     """ New Task """
 
     if request.method == "POST":
+
+        # get user inputs
         title = request.form.get("title")
         text = request.form.get("text")
         due_date = request.form.get("date")
         
+        # check date format
         date_check = True
         if due_date:
             try:
@@ -187,8 +195,10 @@ def new():
             except:
                 date_check = False
         else:
+            # no date entered? date = min
             date = datetime.min
 
+        # everything okay? add task to database
         if title and text and date_check:
             insert_task(session["user"], title, text, date)
             flash("Task added successfully.")
@@ -201,20 +211,39 @@ def new():
         
         redirect(url_for("new"))
 
+        # optional:
         # TODO check if date not in past
         # TODO title max length?
 
     return render("new.html")
 
 
-@app.route("/calendar")
+@app.route("/cal", methods=["GET", "POST"])
 @login_required
-def calendar():
+def cal():
     """ Calendar view """
 
-    #TODO
+    # actual date
+    this_year = datetime.now().year
+    this_month = datetime.now().month
 
-    return render("calendar.html")
+    # get date from url
+    year = request.args.get("year", default = this_year, type = int)
+    month = request.args.get("month", default = this_month, type = int)
+
+    # init calendar
+    cal = calendar.HTMLCalendar().formatmonth(year, month)
+
+    # calculations for calendar navigation
+    prev_month = month - 1 if month > 1 else 12
+    prev_year = year if month > 1 else year - 1
+    next_month = month + 1 if month < 12 else 1
+    next_year = year if month < 12 else year + 1
+
+    return render("calendar.html", calendar=cal, year=year, month=month, 
+                  prev_year=prev_year, prev_month = prev_month, 
+                  next_year=next_year, next_month=next_month, 
+                  this_year=this_year, this_month=this_month)
 
 
 @app.route("/day")

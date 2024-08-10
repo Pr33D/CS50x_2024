@@ -29,9 +29,9 @@
           class="navbar-brand"
           href="
                 {% if session['user'] %}
-                /overview
+                {{ url_for('overview') }}
         {% else %}
-        /
+        {{ url_for('index') }}
         {% endif %}
         "
           >TASKz</a
@@ -51,33 +51,33 @@
           {% if session["user"] %}
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/new">New</a>
+              <a class="nav-link" href="{{ url_for('new') }}">New</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/calendar">Calendar</a>
+              <a class="nav-link" href="{{ url_for('cal') }}">Calendar</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/day">Day</a>
+              <a class="nav-link" href="{{ url_for('day') }}">Day</a>
             </li>
           </ul>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="/logout">logout</a>
+              <a class="nav-link" aria-current="page" href="{{ url_for('logout') }}">logout</a>
             </li>
           </ul>
           {% else %}
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/login">Login</a>
+              <a class="nav-link" href="{{ url_for('login') }}">Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/register">Register</a>
+              <a class="nav-link" href="{{ url_for('register') }}">Register</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/contact">Contact</a>
+              <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/impressum">Impressum</a>
+              <a class="nav-link" href="{{ url_for('impressum') }}">Impressum</a>
             </li>
           </ul>
           {% endif %}

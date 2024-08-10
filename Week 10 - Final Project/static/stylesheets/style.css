@@ -2,12 +2,27 @@ body {
   padding-bottom: 56px;
 }
 
-.checktask {
+.list-no {
+  list-style-type: decimal;
+}
+
+.card .checktask {
   position: absolute;
   right: 12px;
   top: 12px;
 }
+.card .delete {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+}
 
-.list-no {
-  list-style-type: none;
+.cal table {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+}
+.cal th, .cal td {
+  padding: 20px;
+  text-align: center;
 }/*# sourceMappingURL=style.css.map */

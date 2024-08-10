@@ -2,7 +2,14 @@
     main %}
     
     <!-- calendar task view -->
+     <div class="container mt-3 mb-3 text-center">
+        <a href="?year={{ prev_year }}&month={{ prev_month }}" class="btn btn-dark"> -- </a>
+        <a href="?year={{ this_year }}&month={{ this_month }}" class="btn btn-dark">Actual</a>
+        <a href="?year={{ next_year }}&month={{ next_month }}" class="btn btn-dark"> ++ </a>
+     </div>
 
-    <h1>So much space in here...</h1>
+     <div class="container mt-3 cal">
+        {{ calendar | safe }}
+    </div>
     
     {% endblock %}

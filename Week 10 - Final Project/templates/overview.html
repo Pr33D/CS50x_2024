@@ -6,15 +6,14 @@ main %}
 <div class="container-fluid">
   {% if taskz %}
   <!-- container for open taskz -->
-  <div class="container mt-3">
-    <h2>Open Taskz</h2>
-    <div class="row">
+  <div class="container-fluid mt-3">
+    <div class="row justify-content-center">
       {% for task in taskz | sort(attribute="date") %} {% if task.checked == 0 %}
-      <div class="col-12 col-md-3 p-3">
+      <div class="col-12 col-xxl-2 col-xl-3 col-lg-4 col-md-6 p-3">
         <div class="card border-primary">
           <div class="card-body">
             <h5 class="card-title">{{ task.title }}</h5>
-            <form action="/overview" method="post">
+            <form action="{{ url_for('overview') }}" method="post">
               <input
               type="checkbox"
               name="checktask"
@@ -28,12 +27,12 @@ main %}
           <div class="card-body">
             {% if task.date.strftime("%Y") != "0001"  %}
             <p>Expires: {{ task.date.strftime("%B %d, %Y") }}</p>
-            <p><a href="/day?year={{ task.date.strftime('%Y') }}&month={{ task.date.strftime('%m') }}&day={{ task.date.strftime('%d') }}" class="card-link">Day</a>
-            <a href="/calendar?year={{ task.date.strftime('%Y') }}&month={{ task.date.strftime('%m') }}" class="card-link"
-              >Calendar</a></p>
+            <a href="{{ url_for('day') }}?year={{ task.date.strftime('%Y') }}&month={{ task.date.strftime('%m') }}&day={{ task.date.strftime('%d') }}" class="card-link">Day</a>
+            <a href="{{ url_for('cal') }}?year={{ task.date.strftime('%Y') }}&month={{ task.date.strftime('%m') }}" class="card-link"
+              >Calendar</a>
               {% endif %}
-            <form action="/overview" method="post">
-              <button class="btn btn-danger" type="submit" name="delete" value="{{ task.id }}">Delete</button>
+            <form action="{{ url_for('overview') }}" method="post">
+              <button class="btn btn-danger btn-sm delete" type="submit" name="delete" value="{{ task.id }}">Delete</button>
             </form>
           </div>
         </div>
@@ -42,15 +41,14 @@ main %}
     </div>
   </div>
 <!-- container for closed taskz with different build -->
-  <div class="container mt-3">
-    <h2>Closed Taskz</h2>
-    <div class="row">
+  <div class="container-fluid mt-3">
+    <div class="row justify-content-center">
       {% for task in taskz | sort(attribute="created", reverse=True) %} {% if task.checked == 1 %}
-      <div class="col-12 col-md-3 p-3">
+      <div class="col-12 col-xxl-2 col-xl-3 col-lg-4 col-md-6 p-3">
         <div class="card border-secondary">
           <div class="card-body text-secondary">
             <h5 class="card-title">{{ task.title }}</h5>
-            <form action="/overview" method="post">
+            <form action="{{ url_for('overview') }}" method="post">
               <input
               type="checkbox"
               name="checktask"
@@ -62,9 +60,9 @@ main %}
             <p class="card-text" style="white-space: nowrap; overflow: hidden;">{{ task.text }}</p>
           </div>
           <div class="card-body">
-            <p>Created: {{ task.created }}</p>
-            <form action="/overview" method="post">
-              <button class="btn btn-danger" type="submit" name="delete" value="{{ task.id }}">Delete</button>
+            <p>Created: {{ task.created.strftime("%B %d, %Y") }}</p>
+            <form action="{{ url_for('overview') }}" method="post">
+              <button class="btn btn-danger btn-sm delete" type="submit" name="delete" value="{{ task.id }}">Delete</button>
             </form>
           </div>
         </div>

@@ -1,5 +1,5 @@
 // additional theme functions
-// theme load + themebutton text functions are direct @layout!
+// theme load + themebutton text functions are direct @layout.html!
 
 export function themeChange() {
         // Change Theme on Click
