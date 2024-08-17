@@ -3,9 +3,9 @@ import calendar
 from flask import Flask, redirect, render_template as render, request, session, flash, url_for
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime
+from datetime import datetime, date, time
 
-from functions import login_required, insert_user, get_users, get_taskz, insert_task, check_task, delete_task
+from functions import login_required, insert_user, get_users, get_taskz, insert_task, check_task, delete_task, day_taskz
 
 
 # config app
@@ -251,9 +251,24 @@ def cal():
 def day():
     """ Day view """
 
-    #TODO
+    # actual date
+    this_year = datetime.now().year
+    this_month = datetime.now().month
+    this_day = datetime.now().day
 
-    return render("day.html")
+    year = request.args.get("year", default = this_year, type = int)
+    month = request.args.get("month", default = this_month, type = int)
+    day = request.args.get("day", default = this_day, type = int)
+
+    day_date = datetime.combine(date(year, month, day), time.min)
+
+    #taskz = day_taskz(use_date)
+    taskz = get_taskz(session["user"])
+
+    #TODO Tage vor und zurück schalten
+    #TODO Checktask integrieren
+
+    return render("day.html", taskz=taskz, day_date=day_date)
 
 
 #start app

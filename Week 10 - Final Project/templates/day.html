@@ -3,6 +3,24 @@
     
     <!-- all taskz of a single day -->
 
-    <h1>Empty room...</h1>
+    <div class="container-fluid text-center mt-3">
+        {% if taskz %}
+        <!-- container for open taskz -->
+          <div class="row justify-content-center">
+            {% for task in taskz if task.date == day_date and task.checked == 0 %}
+            <div class="col-12 col-xxl-2 col-xl-3 col-lg-4 col-md-6 p-3">
+              <div class="card border-primary">
+                <div class="card-body">
+                  <h5 class="card-title">{{ task.title }}</h5>
+                  <p class="card-text" style="white-space: pre-line">{{ task.text }}</p>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+    {% else %}
+    <h1>No Taskz today - Enjoy life!</h1>
+    {% endif %}
+    </div>
     
     {% endblock %}

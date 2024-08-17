@@ -11,11 +11,6 @@ body {
   right: 12px;
   top: 12px;
 }
-.card .delete {
-  position: absolute;
-  right: 12px;
-  bottom: 12px;
-}
 
 .cal table {
   width: 100%;
