@@ -4,6 +4,7 @@
     <!-- all taskz of a single day -->
 
     <div class="container-fluid text-center mt-3">
+      {{ day_date.strftime("%B %d, %Y") }}
         {% if taskz %}
         <!-- container for open taskz -->
           <div class="row justify-content-center">
@@ -16,10 +17,12 @@
                 </div>
               </div>
             </div>
+            {% else %}
+            <h1>No Taskz today - Enjoy life!</h1>
             {% endfor %}
           </div>
     {% else %}
-    <h1>No Taskz today - Enjoy life!</h1>
+    <h1>No Taskz to show.</h1>
     {% endif %}
     </div>
     

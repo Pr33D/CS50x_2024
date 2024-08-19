@@ -121,21 +121,3 @@ def delete_task(id):
             con.close()
     except:
         return
-    
-
-def day_taskz(date):
-    """ get all taskz of a specific day """
-
-    try:
-        con = sql.connect(DB)
-        try:
-            con.row_factory = sql.Row
-            cur = con.cursor()
-            cur.execute("SELECT * FROM taskz WHERE date = ?", (date,))
-            taskz = cur.fetchall()
-        finally:
-            con.close()
-    except:
-        return
-    
-    return taskz

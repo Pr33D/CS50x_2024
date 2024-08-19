@@ -11,5 +11,30 @@
      <div class="container mt-3 cal">
         {{ calendar | safe }}
     </div>
+
+    <div class="container-fluid text-center mt-3">
+        {% if taskz %}
+        <!-- container for open taskz -->
+          <div class="row justify-content-center">
+            {% for task in taskz if task.date.year == year and task.date.month == month and task.checked == 0 %}
+            <div class="col-12 col-xxl-2 col-xl-3 col-lg-4 col-md-6 p-3">
+              <div class="card border-primary">
+                <div class="card-body">
+                  <h5 class="card-title">{{ task.title }}</h5>
+                  <p class="card-text" style="white-space: pre-line">{{ task.text }}</p>
+                </div>
+                <div class="card-body">
+                  Day: {{ task.date.strftime("%d") }}
+                </div>
+              </div>
+            </div>
+            {% else %}
+            <h1>No Taskz this month.</h1>
+            {% endfor %}
+          </div>
+    {% else %}
+    <h1>No Taskz at all.</h1>
+    {% endif %}
+    </div>
     
     {% endblock %}

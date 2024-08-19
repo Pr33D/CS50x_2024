@@ -5,7 +5,7 @@ from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, date, time
 
-from functions import login_required, insert_user, get_users, get_taskz, insert_task, check_task, delete_task, day_taskz
+from functions import login_required, insert_user, get_users, get_taskz, insert_task, check_task, delete_task
 
 
 # config app
@@ -240,7 +240,10 @@ def cal():
     next_month = month + 1 if month < 12 else 1
     next_year = year if month < 12 else year + 1
 
-    return render("calendar.html", calendar=cal, year=year, month=month, 
+    #get taskz
+    taskz = get_taskz(session["user"])
+
+    return render("calendar.html", taskz=taskz, calendar=cal, year=year, month=month, 
                   prev_year=prev_year, prev_month = prev_month, 
                   next_year=next_year, next_month=next_month, 
                   this_year=this_year, this_month=this_month)
@@ -262,7 +265,7 @@ def day():
 
     day_date = datetime.combine(date(year, month, day), time.min)
 
-    #taskz = day_taskz(use_date)
+    #get taskz
     taskz = get_taskz(session["user"])
 
     #TODO Tage vor und zurück schalten
