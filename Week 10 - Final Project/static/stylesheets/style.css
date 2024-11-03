@@ -2,8 +2,13 @@ body {
   padding-bottom: 56px;
 }
 
+@media (min-width: 768px) {
+  #taskimg {
+    max-width: 50%;
+  }
+}
 .list-no {
-  list-style-type: decimal;
+  list-style-type: none;
 }
 
 .card .checktask {

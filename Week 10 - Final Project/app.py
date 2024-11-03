@@ -23,7 +23,7 @@ def index():
 
     #TODO
 
-    if session["user"]:
+    if session.get("name"):
         return redirect(url_for("overview"))
 
     return render("index.html")

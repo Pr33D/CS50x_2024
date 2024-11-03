@@ -5,11 +5,18 @@ body {
   padding-bottom: 56px;
 }
 
+// index
+
+@media(min-width: 768px) {
+  #taskimg {
+    max-width: 50%;
+  }
+}
 
 // flash messages
 
 .list-no {
-  list-style-type: decimal;
+  list-style-type: none;
 }
 
 
