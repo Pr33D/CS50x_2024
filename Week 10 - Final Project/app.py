@@ -21,8 +21,6 @@ Session(app)
 def index():
     """ The Apps home page """
 
-    #TODO
-
     if session.get("name"):
         return redirect(url_for("overview"))
 
@@ -268,8 +266,8 @@ def day():
     #get taskz
     taskz = get_taskz(session["user"])
 
-    #TODO Tage vor und zurück schalten
-    #TODO Checktask integrieren
+    # optional:
+    #TODO buttons to change days
 
     return render("day.html", taskz=taskz, day_date=day_date)
 
