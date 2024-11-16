@@ -1,5 +1,3 @@
-![Picture alt text](link-to-img.com)
-
 # CS50 Final Project
 
 ## Taskz
@@ -8,7 +6,8 @@ Languages: Python/Flask, Javascript, HTML, SCSS -> CSS, SQL
 
   ### Video
   Lets have a look at the program:
-  [this is a link](www.google.com)
+  
+  [![Screenshot of the web page](https://img.youtube.com/vi/8uGSIDwcTro/default.jpg)]([www.google.com](https://www.youtube.com/watch?v=8uGSIDwcTro))
 
   ### App Description
   Taskz is a little task manager including a calender and day overview to stay focussed at your needs.
