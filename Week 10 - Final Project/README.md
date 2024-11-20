@@ -7,7 +7,7 @@ Languages: Python/Flask, Javascript, HTML, SCSS -> CSS, SQL
   ### Demonstration video
   Lets have a look at the program itself in live action:
   
-  [![Screenshot of the web page](https://img.youtube.com/vi/8uGSIDwcTro/default.jpg)]([www.google.com](https://www.youtube.com/watch?v=8uGSIDwcTro))
+  [![Screenshot of the web page](https://img.youtube.com/vi/8uGSIDwcTro/default.jpg)](https://www.youtube.com/watch?v=8uGSIDwcTro)
 
   ### App Description
   Taskz is a simple, little task manager with 3 different overview pages including a complete, a calender and a single day overview to stay focussed at your needs.
